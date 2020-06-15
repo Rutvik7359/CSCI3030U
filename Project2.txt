@@ -1,0 +1,63 @@
+////////
+Select *
+From "Director"
+Where "Director"."CountryOfBirth"='Canada'
+////////
+Select "Title", "FirstName"
+From "Movie" 
+Inner Join "Director"
+ON "Director"."DirectorID" = "Movie"."MovieID"
+Where "Director"."FirstName" = 'John' AND "Director"."LastName" = 'Menac'
+///////
+Select "FirstName" , "LastName", "Budget"
+From "Actor" 
+Inner Join "Movie"
+ON "Movie"."MovieID" = "Actor"."ActorID"
+Where "Movie"."Budget" > 1000000
+///////
+Select "FirstName" ,
+"LastName", "Budget" ,
+"Budget" * 0.75 AS "'CAD'",
+"Budget" * 0.0091 AS "'JPY'",
+"Budget" * 0.016 AS "'RUB'",
+"Budget" * 1.10 AS "'EUR'",
+"Budget" * 1.0 AS "'CHF'" 
+From "Actor" 
+Inner Join "Movie"
+ON "Movie"."MovieID" = "Actor"."ActorID"
+Where "Movie"."Budget" > 1000000
+////////
+Select *
+From "Director"
+Where "Director"."LastName" LIKE 'J%' AND "Director"."LastName" LIKE 'M%' 
+////////
+Select "Title"
+From "Movie", "Actor", (SELECT "MovieID" FROM "Is" WHERE "Is"."Genre" = 'Comedy') as foo
+Where "Actor"."DateOfBirth" < '1971-01-01' AND "Movie"."MovieID" = "foo"."MovieID" 
+////////
+SELECT t1."FirstName",t2."FirstName"
+FROM "Actor" t1, "Actor" t2
+WHERE t1."EyeColor" = 'black' AND t2."EyeColor" = 'black' AND t1."FirstName" > t2."FirstName"
+ORDER BY t1."FirstName"
+////////
+SELECT AVG("age"(current_date,"DateOfBirth"))
+FROM "Actor"
+////////
+Select "CountryOfBirth",COUNT("CountryOfBirth")
+From "Movie", "Actor", (SELECT "Title" FROM "Movie" WHERE "Movie"."Title" = 'Kungfu Panda 2') as foo
+Where "Movie"."Title" = "foo"."Title" 
+GROUP BY "CountryOfBirth"
+////////
+SELECT COUNT("EyeColor")
+FROM "Actor"
+WHERE "Actor"."EyeColor" = 'black'
+////////
+Select COUNT("Title")
+From "Movie", "Actor", (SELECT "MovieID" FROM "Acts In" WHERE "Acts In"."ActorID" = '100664467') as foo
+Where "Actor"."FirstName" = 'Rutvik' AND "Actor"."LastName" = 'Desai' AND "Movie"."MovieID" = "foo"."MovieID"
+////////
+
+
+
+
+

@@ -1,0 +1,116 @@
+INSERT INTO public."Actor"(
+	"ActorID", "FirstName", "LastName", "CityOfBirth", "ProvinceOfBirth", "CountryOfBirth", "DateOfBirth", "EyeColor")
+	VALUES (100634567, 'Joseph', 'Fanous', 'Toronto', 'Ontario', 'Canada', '1998-10-17', 'brown'),
+	       (100664467, 'Rutvik', 'Desai', 'Surat', 'Gujarat', 'India', '1999-09-18', 'black'),
+    	       (100654268, 'Baljinder', 'Singh', 'Amritsar', 'Punjab', 'India', '1957-09-24', 'black');
+		   
+INSERT INTO public."Awards"(
+	"AwardType", "NumberOfAwards", "Category")
+	VALUES ('Grammy', '4', 'BestMovieOverall'),
+	       ('Balanten', '3', 'BestMovieOfTheYear'),
+	       ('Jonathan', '7', 'NULL');
+
+INSERT INTO public."Director"(
+	"DirectorID", "FirstName", "LastName", "CityOfBirth", "ProvineOfBirth", "CountryOfBirth", "DateOfBirth")
+	VALUES (1, 'John', 'Menac', 'Sudbury', 'Ontario', 'Canada', '1987-07-09'),
+	       (2, 'Patrivk', 'Maset', 'Scarborough', 'Ontario', 'Canada', '1978-09-14'),
+               (3, 'Jon', 'Menric', 'Brampton', 'Ontario', 'Canada', '1997-09-19');
+
+INSERT INTO public."Festivals"(
+	"FestivalName")
+	VALUES ('Coachella'),
+	       ('FarmersFest'),
+	       ('RaveFest');
+
+INSERT INTO public."Movie"(
+	"MovieID", "Title", "ReleaseDate", "Budget", "ReleaseYear", "Rating", "Gross")
+	VALUES (1, 'Kungfu Panda', '2007-08-14', '38732000', '2007', '7', '37463548000'),
+	       (2, 'Kungfu Panda 2', '2009-11-14', '45732000', '2009', '8', '374756758000'),
+	       (3, 'Kungfu Panda 3', '2017-08-14', '57781000', '2017', '9', '989035480000');
+
+INSERT INTO public."Quotes"(
+	"QuoteID", "Quote")
+	VALUES (1, 'This is me'),
+	       (2, 'This is not me')
+	       (3, 'We are what we say');
+
+INSERT INTO public."Theatre"(
+	"TheatreID", "ThaetreName", "TicketPrice", "Location", "CinemaHallType", "Time", "Duration")
+	VALUES (1, 'Cineplex', '17', 'Brampton', 'IMAX', '13:00:00', '2:25:00'),
+	       (2, 'Landmark', '17', 'Oshawa', '3D', '20:30:00', '1:45:00'),
+	       (3, 'CineplexOdeon', '17', 'Scarborough', 'Regular', '17:20:00', '2:45:00');
+
+INSERT INTO public."TypeOfMovie"(
+	"Genre", "DescriptionOfType")
+	VALUES ('Comedy', 'Humorous'),
+		   ('Horror', 'Gives Goosebumps'),
+		   ('Romance', 'Unconditional Love');
+
+INSERT INTO public."University"(
+	"UniversityID", "UniversityColor", "Department", "UniversityName", "Public")
+	VALUES (1, 'Green', 'Science', 'UOIT', True)
+	       (2, 'Blue', 'Business', 'Ryerson', True),
+	       (3, 'Red', 'Engineering', 'UofT', True);
+
+	 		
+INSERT INTO public."Acts In"(
+	"MovieID", "ActorID")
+	VALUES (1, 100634567),
+	       (2, 100664467),
+               (3, 100654268);
+
+
+INSERT INTO public."Directs"(
+	"MovieID", "DirectorID")
+	VALUES (1, 1),
+	       (2, 2),
+	       (3, 3);
+
+INSERT INTO public."From"(
+	"QuoteID", "MovieID")
+	VALUES (1, 1),
+	       (2, 2),
+	       (3, 3);
+
+INSERT INTO public."Is"(
+	"Genre", "MovieID")
+	VALUES ('Horror', 1),
+	       ('Comedy', 2),
+	       ('Romance', 3);
+
+INSERT INTO public."Obtained"(
+	"DirectorID", "UniversityID")
+	VALUES (1, 1),
+	       (2, 2),
+	       (3, 3);
+
+INSERT INTO public."ObtainedThis"(
+	"UniversityID", "ActorID")
+	VALUES (1, 100634567),
+	       (2, 100664467),
+	       (3, 100654268);
+
+INSERT INTO public."PlaysIn"(
+	"MovieID", "TheatreID")
+	VALUES (1, 1),
+	       (2, 2),
+	       (3, 3);
+
+INSERT INTO public."PromotedIn"(
+	"MovieID", "FestivalName")
+	VALUES (1, 'Coachella'),
+	       (2, 'FarmersFest'),
+	       (3, 'RaveFest');
+
+INSERT INTO public."Won"(
+	"AwardType", "MovieID")
+	VALUES ('Grammy', 1),
+	       ('Balanten', 2),
+               ('Jonathan', 3);
+
+
+
+		   
+
+
+

@@ -1,0 +1,374 @@
+/*
+Created: 2019-11-01
+Modified: 2019-11-02
+Model: PostgreSQL 10
+Database: PostgreSQL 10
+*/
+
+
+-- Create tables section -------------------------------------------------
+
+-- Table Movie
+
+CREATE TABLE "Movie"(
+ "MovieID" Bigint NOT NULL,
+ "Title" Character varying NOT NULL,
+ "ReleaseDate" Date NOT NULL,
+ "Budget" Bigint NOT NULL,
+ "ReleaseYear" Integer NOT NULL,
+ "Rating" Integer,
+ "Gross" Bigint
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Movie
+
+ALTER TABLE "Movie" ADD CONSTRAINT "PK_Movie" PRIMARY KEY ("MovieID")
+;
+
+ALTER TABLE "Movie" ADD CONSTRAINT "ReleaseDate" UNIQUE ("ReleaseDate")
+;
+
+ALTER TABLE "Movie" ADD CONSTRAINT "Title" UNIQUE ("Title")
+;
+
+-- Table Director
+
+CREATE TABLE "Director"(
+ "DirectorID" Bigint NOT NULL,
+ "FirstName" Character varying NOT NULL,
+ "LastName" Character varying NOT NULL,
+ "CityOfBirth" Character varying NOT NULL,
+ "ProvineOfBirth" Character varying NOT NULL,
+ "CountryOfBirth" Character varying NOT NULL,
+ "DateOfBirth" Date NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Director
+
+ALTER TABLE "Director" ADD CONSTRAINT "PK_Director" PRIMARY KEY ("DirectorID")
+;
+
+-- Table Actor
+
+CREATE TABLE "Actor"(
+ "ActorID" Bigint NOT NULL,
+ "FirstName" Character varying NOT NULL,
+ "LastName" Character varying NOT NULL,
+ "CityOfBirth" Character varying NOT NULL,
+ "ProvinceOfBirth" Character varying NOT NULL,
+ "CountryOfBirth" Character varying NOT NULL,
+ "DateOfBirth" Date NOT NULL,
+ "EyeColor" Character varying
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Actor
+
+ALTER TABLE "Actor" ADD CONSTRAINT "PK_Actor" PRIMARY KEY ("ActorID")
+;
+
+-- Table University
+
+CREATE TABLE "University"(
+ "UniversityID" Bigint NOT NULL,
+ "UniversityColor" Character varying NOT NULL,
+ "Department" Character varying NOT NULL,
+ "UniversityName" Character varying NOT NULL,
+ "Public" Boolean NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table University
+
+ALTER TABLE "University" ADD CONSTRAINT "PK_University" PRIMARY KEY ("UniversityID")
+;
+
+-- Table TypeOfMovie
+
+CREATE TABLE "TypeOfMovie"(
+ "Genre" Character varying NOT NULL,
+ "DescriptionOfType" Character varying NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table TypeOfMovie
+
+ALTER TABLE "TypeOfMovie" ADD CONSTRAINT "PK_TypeOfMovie" PRIMARY KEY ("Genre")
+;
+
+ALTER TABLE "TypeOfMovie" ADD CONSTRAINT "Description" UNIQUE ("DescriptionOfType")
+;
+
+-- Table Theatre
+
+CREATE TABLE "Theatre"(
+ "TheatreID" Bigint NOT NULL,
+ "ThaetreName" Character varying NOT NULL,
+ "TicketPrice" Bigint NOT NULL,
+ "Location" Character varying NOT NULL,
+ "CinemaHallType" Character varying NOT NULL,
+ "Time" Time NOT NULL,
+ "Duration" Time NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Theatre
+
+ALTER TABLE "Theatre" ADD CONSTRAINT "PK_Theatre" PRIMARY KEY ("TheatreID")
+;
+
+ALTER TABLE "Theatre" ADD CONSTRAINT "ThaetreName" UNIQUE ("ThaetreName")
+;
+
+-- Table Quotes
+
+CREATE TABLE "Quotes"(
+ "QuoteID" Bigint NOT NULL,
+ "Quote" Character varying
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Quotes
+
+ALTER TABLE "Quotes" ADD CONSTRAINT "PK_Quotes" PRIMARY KEY ("QuoteID")
+;
+
+-- Table Awards
+
+CREATE TABLE "Awards"(
+ "AwardType" Character varying NOT NULL,
+ "NumberOfAwards" Bigint NOT NULL,
+ "Category" Character varying
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Awards
+
+ALTER TABLE "Awards" ADD CONSTRAINT "PK_Awards" PRIMARY KEY ("AwardType")
+;
+
+-- Table Festivals
+
+CREATE TABLE "Festivals"(
+ "FestivalName" Character varying NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Festivals
+
+ALTER TABLE "Festivals" ADD CONSTRAINT "PK_Festivals" PRIMARY KEY ("FestivalName")
+;
+
+-- Table Directs
+
+CREATE TABLE "Directs"(
+ "MovieID" Bigint NOT NULL,
+ "DirectorID" Bigint NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Directs
+
+ALTER TABLE "Directs" ADD CONSTRAINT "PK_Directs" PRIMARY KEY ("MovieID","DirectorID")
+;
+
+-- Table Obtained
+
+CREATE TABLE "Obtained"(
+ "DirectorID" Bigint NOT NULL,
+ "UniversityID" Bigint NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Obtained
+
+ALTER TABLE "Obtained" ADD CONSTRAINT "PK_Obtained" PRIMARY KEY ("DirectorID","UniversityID")
+;
+
+-- Table ObtainedThis
+
+CREATE TABLE "ObtainedThis"(
+ "UniversityID" Bigint NOT NULL,
+ "ActorID" Bigint NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table ObtainedThis
+
+ALTER TABLE "ObtainedThis" ADD CONSTRAINT "PK_ObtainedThis" PRIMARY KEY ("UniversityID","ActorID")
+;
+
+-- Table From
+
+CREATE TABLE "From"(
+ "QuoteID" Bigint NOT NULL,
+ "MovieID" Bigint NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table From
+
+ALTER TABLE "From" ADD CONSTRAINT "PK_From" PRIMARY KEY ("QuoteID","MovieID")
+;
+
+-- Table Won
+
+CREATE TABLE "Won"(
+ "AwardType" Character varying NOT NULL,
+ "MovieID" Bigint NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Won
+
+ALTER TABLE "Won" ADD CONSTRAINT "PK_Won" PRIMARY KEY ("AwardType","MovieID")
+;
+
+-- Table PromotedIn
+
+CREATE TABLE "PromotedIn"(
+ "MovieID" Bigint NOT NULL,
+ "FestivalName" Character varying NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table PromotedIn
+
+ALTER TABLE "PromotedIn" ADD CONSTRAINT "PK_PromotedIn" PRIMARY KEY ("MovieID","FestivalName")
+;
+
+-- Table PlaysIn
+
+CREATE TABLE "PlaysIn"(
+ "MovieID" Bigint NOT NULL,
+ "TheatreID" Bigint NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table PlaysIn
+
+ALTER TABLE "PlaysIn" ADD CONSTRAINT "PK_PlaysIn" PRIMARY KEY ("MovieID","TheatreID")
+;
+
+-- Table Is
+
+CREATE TABLE "Is"(
+ "Genre" Character varying NOT NULL,
+ "MovieID" Bigint NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Is
+
+ALTER TABLE "Is" ADD CONSTRAINT "PK_Is" PRIMARY KEY ("Genre","MovieID")
+;
+
+-- Table Acts In
+
+CREATE TABLE "Acts In"(
+ "MovieID" Bigint NOT NULL,
+ "ActorID" Bigint NOT NULL
+)
+WITH (
+ autovacuum_enabled=true)
+;
+
+-- Add keys for table Acts In
+
+ALTER TABLE "Acts In" ADD CONSTRAINT "PK_Acts In" PRIMARY KEY ("MovieID","ActorID")
+;
+-- Create foreign keys (relationships) section ------------------------------------------------- 
+
+ALTER TABLE "Directs" ADD CONSTRAINT "Relationship1" FOREIGN KEY ("MovieID") REFERENCES "Movie" ("MovieID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Directs" ADD CONSTRAINT "Relationship2" FOREIGN KEY ("DirectorID") REFERENCES "Director" ("DirectorID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Obtained" ADD CONSTRAINT "Relationship6" FOREIGN KEY ("DirectorID") REFERENCES "Director" ("DirectorID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Obtained" ADD CONSTRAINT "Relationship7" FOREIGN KEY ("UniversityID") REFERENCES "University" ("UniversityID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "ObtainedThis" ADD CONSTRAINT "Relationship8" FOREIGN KEY ("UniversityID") REFERENCES "University" ("UniversityID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "ObtainedThis" ADD CONSTRAINT "Relationship9" FOREIGN KEY ("ActorID") REFERENCES "Actor" ("ActorID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "From" ADD CONSTRAINT "Relationship10" FOREIGN KEY ("QuoteID") REFERENCES "Quotes" ("QuoteID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "From" ADD CONSTRAINT "Relationship11" FOREIGN KEY ("MovieID") REFERENCES "Movie" ("MovieID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Won" ADD CONSTRAINT "Relationship12" FOREIGN KEY ("AwardType") REFERENCES "Awards" ("AwardType") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Won" ADD CONSTRAINT "Relationship13" FOREIGN KEY ("MovieID") REFERENCES "Movie" ("MovieID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "PromotedIn" ADD CONSTRAINT "Relationship14" FOREIGN KEY ("MovieID") REFERENCES "Movie" ("MovieID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "PromotedIn" ADD CONSTRAINT "Relationship15" FOREIGN KEY ("FestivalName") REFERENCES "Festivals" ("FestivalName") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "PlaysIn" ADD CONSTRAINT "Relationship16" FOREIGN KEY ("MovieID") REFERENCES "Movie" ("MovieID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "PlaysIn" ADD CONSTRAINT "Relationship17" FOREIGN KEY ("TheatreID") REFERENCES "Theatre" ("TheatreID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Is" ADD CONSTRAINT "Relationship18" FOREIGN KEY ("Genre") REFERENCES "TypeOfMovie" ("Genre") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Is" ADD CONSTRAINT "Relationship19" FOREIGN KEY ("MovieID") REFERENCES "Movie" ("MovieID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Acts In" ADD CONSTRAINT "Relationship20" FOREIGN KEY ("MovieID") REFERENCES "Movie" ("MovieID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE "Acts In" ADD CONSTRAINT "Relationship21" FOREIGN KEY ("ActorID") REFERENCES "Actor" ("ActorID") ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+
+
+
